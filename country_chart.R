@@ -1,0 +1,68 @@
+pal<-c("United Kingdom"="#a6cee3", 
+             "Sweden"="#1f78b4",
+             "Germany"="#d73027",
+             "France"="#b2df8a",
+             "Estonia"="#33a02c",
+             "Poland"="#f46d43",
+             "Ireland" = "#bf812d" ,
+             "Switzerland"="#8c510a",
+             "Italy"="#fdbf6f",
+             "Lithuania" = "#B3DE69",
+             "Portugal" ="#D9D9D9",
+             "Austria"="#fee090",
+             "Denmark"="#c7eae5",
+             "Spain"="#80cdc1",
+             "Netherlands"="#35978f",
+             "Ecuador"="#b15928",
+             "Iceland"="#01665e",
+             "Japan"="#542788",
+             "China"="#8073ac",
+             "India"="#b2abd2",
+             "Hong Kong SAR"="#BEBADA",
+             "Chile"="#d8daeb",
+             "USA"="#bf812d",
+             "Belgium"="#35978f",
+             "Canada"="#35978f",
+             "Norway"="deepskyblue3",
+             "Israel"="chartreuse4",
+             "United States"="cornsilk3",
+             "Australia"="darkorchid")
+
+cl<-read.table("country_list.txt",sep="\t",h=T)
+
+cl$Region<-fct_recode(cl$Country,"Norway"="Norway",
+                      "Europe" = "United Kingdom",
+                      "Europe" = "Sweden",
+                      "Europe" = "Germany",
+                      "Europe" = "France",
+                      "Europe" = "Sweden",
+                      "Europe" = "Estonia",
+                      "Europe" = "Poland",
+                      "Europe" = "Ireland",
+                      "Europe" = "Switzerland",
+                      "Europe" = "Italy",
+                      "Europe" = "Lithuania",
+                      "Europe" = "Portugal",
+                      "Europe" = "Denmark",
+                      "Europe" = "Austria",
+                      "Europe" = "Belgium",
+                      "Europe" = "Spain",
+                      "Europe" = "Netherlands",
+                      "Asia" = "China",
+                      "Asia" = "India",
+                      "Asia" = "Hong Kong SAR",
+                      "North America" = "United States",
+                      "North America" = "Canada",
+                      "South America" = "Chile",
+                      "Asia" = "Japan",
+                      "North America" = "USA",
+                      "South America" = "Ecuador",
+                      "Middle East" = "Israel",
+                      "Europe"="Iceland")
+ggplot(cl,aes(x=Region,fill=Country))+
+  geom_bar(stat="count",position="stack")+
+  scale_fill_manual(values=pal)+
+  theme_bw()+
+  ylab("")+
+  theme(axis.text.x = element_text(angle=45,hjust=1))
+ggsave("country_chart.png",width=22,height=18,unit="cm")
